@@ -1,0 +1,100 @@
+/* M3 basic dialog on RAC ModalOverlay + Modal + Dialog: scrim, corner.extra-large, elevation 3. */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--mild-z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: var(--mild-space-4);
+  background: var(--mild-color-overlay);
+  backdrop-filter: blur(2px);
+  transition: opacity var(--mild-motion-medium) var(--mild-easing-standard);
+}
+
+.overlay[data-entering],
+.overlay[data-exiting] {
+  opacity: 0;
+}
+
+/* The sized box. Consumer `className` lands here. */
+.modal {
+  width: min(560px, calc(100vw - 32px));
+  max-height: min(760px, calc(100vh - 32px));
+  color: var(--mild-color-text);
+  font-family: var(--mild-font-family);
+  outline: none;
+  transition: transform var(--mild-motion-medium) var(--mild-easing-standard);
+}
+
+.modal[data-entering],
+.modal[data-exiting] {
+  transform: scale(0.96);
+}
+
+.sm { width: min(360px, calc(100vw - 32px)); }
+.md { width: min(480px, calc(100vw - 32px)); }
+.lg { width: min(640px, calc(100vw - 32px)); }
+
+.panel {
+  box-sizing: border-box;
+  max-height: inherit;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--mild-color-surface-raised);
+  border: 1px solid var(--mild-color-border);
+  border-radius: var(--md-sys-shape-corner-extra-large);
+  box-shadow: var(--mild-elevation-3);
+  outline: none;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--mild-space-4);
+  padding: var(--mild-space-6);
+  border-bottom: 1px solid var(--mild-color-border);
+}
+
+.heading { min-width: 0; }
+
+.title {
+  margin: 0;
+  font-size: var(--mild-font-size-lg);
+}
+
+.description {
+  margin: var(--mild-space-2) 0 0;
+  color: var(--mild-color-text-muted);
+  font-size: var(--mild-font-size-sm);
+}
+
+.close { margin: calc(var(--mild-space-2) * -1) calc(var(--mild-space-2) * -1) 0 0; }
+
+.body {
+  padding: var(--mild-space-6);
+  overflow: auto;
+  line-height: var(--mild-line-height-body);
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--mild-space-2);
+  padding: var(--mild-space-4) var(--mild-space-6);
+  border-top: 1px solid var(--mild-color-border);
+}
+
+@media (max-width: 520px) {
+  .overlay { padding: var(--mild-space-2); }
+  .modal { width: calc(100vw - 16px); max-height: calc(100vh - 16px); }
+  .header, .body { padding: var(--mild-space-4); }
+  .footer { padding: var(--mild-space-3) var(--mild-space-4); flex-wrap: wrap; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay, .modal { transition: none; }
+}

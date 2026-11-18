@@ -1,0 +1,8 @@
+.overflow { max-width: 100%; overflow-x: auto; border: 1px solid var(--mild-color-border); border-radius: var(--mild-card-radius); background: var(--mild-color-surface); }
+.overflow:focus-visible { outline: 2px solid var(--mild-focus-color); outline-offset: 2px; }
+.table { width: 100%; min-width: 640px; border-collapse: collapse; color: var(--mild-color-text); font: var(--mild-font-size-sm)/var(--mild-line-height-body) var(--mild-font-family); }
+.table caption { padding: var(--mild-space-4); text-align: left; font-weight: var(--mild-font-weight-semibold); }
+.table th, .table td { padding: var(--mild-space-3) var(--mild-space-4); border-bottom: 1px solid var(--mild-color-divider); text-align: left; vertical-align: middle; }
+.table th { color: var(--mild-color-text-muted); background: var(--mild-color-surface-subtle); font-size: var(--mild-font-size-xs); font-weight: var(--mild-font-weight-semibold); letter-spacing: .04em; text-transform: uppercase; }
+.table tbody tr:last-child td { border-bottom: 0; }
+.table tbody tr:hover { background: color-mix(in srgb, var(--mild-color-action-container) 32%, transparent); }

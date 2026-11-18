@@ -1,0 +1,130 @@
+/* M3 side sheet: 320px, 56px header, scrolling body, optional footer. */
+.panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  box-sizing: border-box;
+  color: var(--mild-color-text);
+  background: var(--md-sys-color-surface);
+  font: var(--mild-type-body-medium);
+  letter-spacing: var(--mild-tracking-body-medium);
+}
+
+.dialog {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  outline: none;
+}
+
+.header {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: var(--mild-space-2);
+  height: 56px;
+  padding: 0 var(--mild-space-2) 0 var(--mild-space-5);
+  box-sizing: border-box;
+}
+
+.title {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  font: var(--mild-type-title-medium);
+  letter-spacing: var(--mild-tracking-title-medium);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.body {
+  flex: 1;
+  min-height: 0;
+  padding: var(--mild-space-4) var(--mild-space-5);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+.footer {
+  flex: none;
+  padding: var(--mild-space-3) var(--mild-space-5);
+  border-top: 1px solid var(--md-sys-color-outline-variant);
+}
+
+/* Standalone placement (inside an EditorShell the region places the panel). */
+.standalone {
+  width: var(--side-panel-width, var(--mild-panel-width));
+  max-width: 100%;
+}
+
+.standalone[data-mode="docked"] {
+  height: 100%;
+  border-inline-end: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.standalone[data-mode="overlay"] {
+  position: fixed;
+  z-index: var(--mild-z-panel);
+  top: var(--side-panel-inset, 0);
+  bottom: 0;
+  inset-inline-start: 0;
+  overflow: hidden;
+  border-start-end-radius: var(--md-sys-shape-corner-large);
+  border-end-end-radius: var(--md-sys-shape-corner-large);
+  box-shadow: var(--mild-elevation-2);
+  animation: side-panel-in var(--mild-motion-medium) var(--mild-easing-standard);
+}
+
+@keyframes side-panel-in {
+  from { opacity: 0; transform: translateX(-12px); }
+  to { opacity: 1; transform: none; }
+}
+
+[dir="rtl"] .standalone[data-mode="overlay"] { animation-name: side-panel-in-rtl; }
+
+@keyframes side-panel-in-rtl {
+  from { opacity: 0; transform: translateX(12px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Sheet mode. The standalone body clears the software keyboard (in a shell, its SheetContent does). */
+.sheetPanel {
+  flex: 1;
+  background: var(--md-sys-color-surface-container-low);
+}
+
+.standaloneSheet .body { padding-bottom: calc(var(--mild-space-4) + var(--sheet-scroll-padding-y, 0px)); }
+
+/* Standalone sheet: overlay, scrim and sheet frame (inside a shell, EditorShell draws these). */
+.sheetOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--mild-z-modal);
+}
+
+.sheetBackdrop { background: var(--mild-color-overlay); }
+
+.sheet {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: calc(100dvh - var(--mild-space-6));
+  color: var(--mild-color-text);
+  background: var(--md-sys-color-surface-container-low);
+  border-radius: var(--md-sys-shape-corner-extra-large) var(--md-sys-shape-corner-extra-large) 0 0;
+  box-shadow: var(--mild-elevation-3);
+}
+
+.standaloneSheet { outline: none; }
+
+/* M3 drag handle: visual only, the gesture belongs to RAC's Sheet. */
+.sheetHandle {
+  flex: none;
+  width: 32px;
+  height: 4px;
+  margin: var(--mild-space-3) auto var(--mild-space-1);
+  background: var(--md-sys-color-outline-variant);
+  border-radius: var(--md-sys-shape-corner-full);
+}

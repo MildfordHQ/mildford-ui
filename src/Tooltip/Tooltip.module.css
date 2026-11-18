@@ -1,0 +1,22 @@
+.tooltip {
+  z-index: var(--mild-z-tooltip);
+  display: flex;
+  align-items: center;
+  gap: var(--mild-space-2);
+  max-width: 280px;
+  min-height: 24px;
+  padding: var(--mild-space-1) var(--mild-space-2);
+  box-sizing: border-box;
+  color: var(--md-sys-color-inverse-on-surface);
+  background: var(--md-sys-color-inverse-surface);
+  border-radius: var(--md-sys-shape-corner-small);
+  font: var(--mild-type-label-medium);
+  letter-spacing: var(--mild-tracking-label-medium);
+  pointer-events: none;
+  transition: opacity var(--mild-motion-fast) var(--mild-easing-standard);
+}
+
+.tooltip[data-entering],
+.tooltip[data-exiting] {
+  opacity: 0;
+}

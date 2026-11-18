@@ -1,0 +1,173 @@
+/* Fixed frame, grid regions, z ladder, dividers. */
+.shell {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  grid-template-areas:
+    "appbar appbar appbar"
+    "rail panel main";
+  grid-template-rows: var(--mild-appbar-height) minmax(0, 1fr);
+  grid-template-columns: auto auto minmax(0, 1fr);
+  overflow: hidden;
+  color: var(--mild-color-text);
+  background: var(--md-sys-color-surface);
+  font-family: var(--mild-font-family);
+}
+
+.shell[data-rail="bottom"] {
+  grid-template-areas:
+    "appbar"
+    "main"
+    "rail";
+  grid-template-rows: var(--mild-appbar-height) minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.appBar {
+  position: relative;
+  z-index: var(--mild-z-appbar);
+  grid-area: appbar;
+  display: flex;
+  align-items: stretch;
+  min-width: 0;
+  background: var(--md-sys-color-surface);
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.appBar > * { flex: 1; min-width: 0; }
+
+.rail {
+  position: relative;
+  z-index: var(--mild-z-rail);
+  grid-area: rail;
+  display: flex;
+  flex-direction: column;
+  width: var(--mild-rail-width);
+  min-height: 0;
+  background: var(--md-sys-color-surface);
+  border-right: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.rail > * { flex: 1; min-height: 0; }
+
+.rail[data-placement="bottom"] {
+  flex-direction: row;
+  width: auto;
+  border-right: 0;
+  border-top: 1px solid var(--md-sys-color-outline-variant);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.panel {
+  z-index: var(--mild-z-panel);
+  grid-area: panel;
+  display: flex;
+  flex-direction: column;
+  width: var(--mild-panel-width);
+  min-height: 0;
+  background: var(--md-sys-color-surface);
+  border-right: 1px solid var(--md-sys-color-outline-variant);
+  animation: panel-in var(--mild-motion-medium) var(--mild-easing-standard);
+}
+
+.panel > * { flex: 1; min-height: 0; }
+
+.panel[data-mode="overlay"] {
+  position: absolute;
+  top: var(--mild-appbar-height);
+  bottom: 0;
+  left: var(--mild-rail-width);
+  border-right: 0;
+  border-radius: 0 var(--md-sys-shape-corner-large) var(--md-sys-shape-corner-large) 0;
+  box-shadow: var(--mild-elevation-2);
+  overflow: hidden;
+}
+
+.shell:not([data-rail="start"]) .panel[data-mode="overlay"] { left: 0; }
+
+@keyframes panel-in {
+  from { opacity: 0; transform: translateX(-12px); }
+  to { opacity: 1; transform: none; }
+}
+
+.main {
+  grid-area: main;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+}
+
+.toolbar {
+  position: relative;
+  z-index: var(--mild-z-toolbar);
+  flex: none;
+  display: flex;
+  min-width: 0;
+  background: var(--md-sys-color-surface);
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.toolbar > * { flex: 1; min-width: 0; }
+
+.workspaceFrame {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}
+
+.workspace {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--mild-color-workspace);
+}
+
+/* Children opt back into pointer events; the layer itself never blocks the stage. */
+.overlays {
+  position: absolute;
+  inset: 0;
+  z-index: var(--mild-z-overlay-base);
+  pointer-events: none;
+}
+
+.overlays > * { pointer-events: auto; }
+
+.sheetOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--mild-z-modal);
+}
+
+.sheetBackdrop { background: var(--mild-color-overlay); }
+
+.sheet {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: calc(100dvh - var(--mild-space-6));
+  color: var(--mild-color-text);
+  background: var(--md-sys-color-surface-container-low);
+  border-radius: var(--md-sys-shape-corner-extra-large) var(--md-sys-shape-corner-extra-large) 0 0;
+  box-shadow: var(--mild-elevation-3);
+}
+
+.sheetContent {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding-bottom: var(--sheet-scroll-padding-y, 0);
+  outline: none;
+}
+
+.sheetContent > :not(.sheetHandle) { flex: 1; min-height: 0; }
+
+/* M3 drag handle: visual only, the gesture belongs to the sheet. */
+.sheetHandle {
+  flex: none;
+  width: 32px;
+  height: 4px;
+  margin: var(--mild-space-3) auto var(--mild-space-1);
+  background: var(--md-sys-color-outline-variant);
+  border-radius: var(--md-sys-shape-corner-full);
+}

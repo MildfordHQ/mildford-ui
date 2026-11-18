@@ -1,0 +1,236 @@
+/* M3 navigation rail and navigation bar. */
+
+/* ---- Rail: an 80px column provided by the shell; entries 72px, 4px gaps, 12px top inset. ---- */
+.rail {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--mild-space-1);
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 0;
+  padding-top: var(--mild-space-3);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.railGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--mild-space-1);
+}
+
+.divider {
+  align-self: stretch;
+  height: 1px;
+  margin: var(--mild-space-1) var(--mild-space-4);
+  background: var(--md-sys-color-outline-variant);
+}
+
+/* ---- Entry ---- */
+.item {
+  --nav-indicator-width: 56px;
+  position: relative;
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--mild-space-1);
+  box-sizing: border-box;
+  width: 72px;
+  min-height: 56px;
+  padding: 0 0 var(--mild-space-1);
+  color: var(--md-sys-color-on-surface-variant);
+  background: transparent;
+  border: 0;
+  font: var(--mild-type-label-medium);
+  letter-spacing: var(--mild-tracking-label-medium);
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
+
+.indicator {
+  position: relative;
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--nav-indicator-width);
+  height: 32px;
+  background: transparent;
+  border-radius: var(--md-sys-shape-corner-full);
+  transition:
+    border-radius var(--mild-motion-expressive-spatial),
+    background-color var(--mild-motion-expressive-effect),
+    color var(--mild-motion-expressive-effect);
+}
+
+/* State layer: on-surface at the M3 state opacities, clipped to the indicator. */
+.indicator::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--md-sys-color-on-surface);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--mild-motion-fast) var(--mild-easing-standard);
+}
+
+.item[data-hovered] .indicator::before { opacity: var(--mild-state-hover); }
+.item[data-pressed] .indicator::before { opacity: var(--mild-state-pressed); }
+.item[data-focus-visible] .indicator { outline: 2px solid var(--mild-focus-color); outline-offset: 2px; }
+
+.icon {
+  position: relative;
+  display: flex;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon > svg { width: 24px; height: 24px; fill: currentColor; }
+
+.label {
+  max-width: 100%;
+  overflow: hidden;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Active: secondary-container indicator, morph full → medium with a small spring pop. */
+.item[data-selected] { color: var(--md-sys-color-on-surface); }
+
+.item[data-selected] .indicator {
+  color: var(--mild-color-on-selected);
+  background: var(--mild-color-selected);
+  border-radius: var(--md-sys-shape-corner-medium);
+  animation: nav-indicator-pop var(--mild-motion-expressive-spatial);
+}
+
+.item[data-selected] .label { color: var(--md-sys-color-on-surface); }
+
+@keyframes nav-indicator-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+  100% { transform: scale(1); }
+}
+
+/* More entry: the active tool lives in the sheet. */
+.item[data-has-selection] .indicator { background: color-mix(in srgb, var(--mild-color-selected) 60%, transparent); }
+
+.item[data-disabled] {
+  color: color-mix(in srgb, var(--md-sys-color-on-surface) 38%, transparent);
+  cursor: not-allowed;
+}
+
+/* Lock badge: 16px circle, primary on surface with a 1px surface ring. */
+.badge {
+  position: absolute;
+  top: calc(-1 * var(--mild-space-1));
+  inset-inline-end: var(--mild-space-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 16px;
+  height: 16px;
+  padding: 2px;
+  color: var(--md-sys-color-primary);
+  background: var(--md-sys-color-surface);
+  border-radius: var(--md-sys-shape-corner-full);
+  outline: 1px solid var(--md-sys-color-surface);
+}
+
+.badge > svg { width: 100%; height: 100%; fill: currentColor; }
+
+/* ---- Bar: 64px + safe area, entries share the width. ---- */
+.bar {
+  display: flex;
+  align-items: stretch;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: var(--mild-nav-bar-height);
+  padding-bottom: env(safe-area-inset-bottom);
+  background: var(--md-sys-color-surface-container);
+}
+
+/* EditorShell's bottom rail region already pads for the safe area and draws the surface. */
+.bar[data-in-shell] { padding-bottom: 0; background: transparent; }
+
+.barTools { display: flex; flex: 1 1 0; min-width: 0; }
+.barTools[data-count="2"] { flex-grow: 2; }
+.barTools[data-count="3"] { flex-grow: 3; }
+.barTools[data-count="4"] { flex-grow: 4; }
+.barTools[data-count="5"] { flex-grow: 5; }
+.barTools[data-count="6"] { flex-grow: 6; }
+.barTools[data-count="7"] { flex-grow: 7; }
+.barTools[data-count="8"] { flex-grow: 8; }
+.barTools[data-count="9"] { flex-grow: 9; }
+.barTools[data-count="10"] { flex-grow: 10; }
+
+.barGroup { display: flex; flex: 1; min-width: 0; }
+
+.bar .item {
+  --nav-indicator-width: 64px;
+  flex: 1 1 0;
+  justify-content: center;
+  width: auto;
+  min-width: 0;
+  min-height: var(--mild-nav-bar-height);
+  padding: var(--mild-space-3) var(--mild-space-1) var(--mild-space-4);
+}
+
+.bar .item .indicator { max-width: 100%; }
+
+/* ---- More sheet ---- */
+.sheetOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--mild-z-modal);
+}
+
+.sheetBackdrop { background: var(--mild-color-overlay); }
+
+.sheet {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: calc(100dvh - var(--mild-space-6));
+  color: var(--mild-color-text);
+  background: var(--md-sys-color-surface-container-low);
+  border-radius: var(--md-sys-shape-corner-extra-large) var(--md-sys-shape-corner-extra-large) 0 0;
+  box-shadow: var(--mild-elevation-3);
+}
+
+.sheetContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mild-space-2);
+  min-height: 0;
+  padding: 0 var(--mild-space-4) calc(var(--mild-space-4) + var(--sheet-scroll-padding-y, 0px));
+  overflow-y: auto;
+  outline: none;
+}
+
+/* M3 drag handle: visual only, the gesture belongs to the sheet. */
+.sheetHandle {
+  flex: none;
+  width: 32px;
+  height: 4px;
+  margin: var(--mild-space-3) auto var(--mild-space-2);
+  background: var(--md-sys-color-outline-variant);
+  border-radius: var(--md-sys-shape-corner-full);
+}
+
+.sheetGroup {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+  gap: var(--mild-space-2) var(--mild-space-1);
+  justify-items: center;
+}

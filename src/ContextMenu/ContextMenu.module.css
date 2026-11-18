@@ -1,0 +1,12 @@
+.target {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  outline: none;
+  -webkit-touch-callout: none;
+}
+
+.target:focus-visible {
+  outline: 2px solid var(--mild-focus-color);
+  outline-offset: -2px;
+}

@@ -1,0 +1,154 @@
+.popover {
+  z-index: var(--mild-z-popover);
+  min-width: var(--menu-min-width, 220px);
+  max-width: min(360px, calc(100vw - 16px));
+  color: var(--mild-color-text);
+  background: var(--md-sys-color-surface-container);
+  border-radius: var(--md-sys-shape-corner-medium);
+  box-shadow: var(--mild-elevation-2);
+  overflow: auto;
+  transition: opacity var(--mild-motion-fast) var(--mild-easing-standard), transform var(--mild-motion-medium) var(--mild-easing-standard);
+}
+
+.popover[data-entering],
+.popover[data-exiting] { opacity: 0; }
+.popover[data-entering][data-placement="bottom"] { transform: translateY(-4px); }
+.popover[data-entering][data-placement="top"] { transform: translateY(4px); }
+
+.menu {
+  --menu-row: 48px;
+  display: flex;
+  flex-direction: column;
+  padding: var(--mild-space-2) 0;
+  outline: none;
+  font: var(--mild-type-body-medium);
+  letter-spacing: var(--mild-tracking-body-medium);
+}
+
+.menu[data-density="compact"] { --menu-row: 40px; }
+
+.section { display: flex; flex-direction: column; }
+.section + .section,
+.section + .item,
+.item + .section { border-top: 1px solid var(--md-sys-color-outline-variant); margin-top: var(--mild-space-2); padding-top: var(--mild-space-2); }
+
+.header {
+  padding: var(--mild-space-2) var(--mild-space-4) var(--mild-space-1);
+  color: var(--mild-color-text-muted);
+  font: var(--mild-type-title-small);
+  letter-spacing: var(--mild-tracking-title-small);
+}
+
+.item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--mild-space-3);
+  min-height: var(--menu-row);
+  padding: 0 var(--mild-space-4);
+  box-sizing: border-box;
+  color: var(--mild-color-text);
+  cursor: default;
+  outline: none;
+  user-select: none;
+}
+
+.item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: currentColor;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--mild-motion-fast) var(--mild-easing-standard);
+}
+
+.item[data-hovered]::after,
+.item[data-focused]::after { opacity: var(--mild-state-hover); }
+.item[data-pressed]::after { opacity: var(--mild-state-pressed); }
+.item[data-focus-visible] { outline: 2px solid var(--mild-focus-color); outline-offset: -2px; }
+.item[data-open]::after { opacity: var(--mild-state-hover); }
+
+.item[data-disabled] {
+  color: color-mix(in srgb, var(--md-sys-color-on-surface) 38%, transparent);
+}
+
+.destructive { color: var(--md-sys-color-error); }
+
+.icon,
+.selection {
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.destructive .icon { color: inherit; }
+.item[data-disabled] .icon { color: inherit; }
+
+.selection svg { fill: var(--md-sys-color-primary); }
+
+.radioDot {
+  width: 8px;
+  height: 8px;
+  background: var(--md-sys-color-primary);
+  border-radius: var(--md-sys-shape-corner-full);
+}
+
+.text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  padding: var(--mild-space-2) 0;
+}
+
+.label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.description {
+  color: var(--mild-color-text-muted);
+  font: var(--mild-type-body-small);
+  letter-spacing: var(--mild-tracking-body-small);
+}
+
+.item[data-disabled] .description { color: inherit; }
+
+.shortcut,
+.chevron {
+  flex: none;
+  margin-left: auto;
+  color: var(--md-sys-color-on-surface-variant);
+  fill: currentColor;
+}
+
+/* Grid sections: items become 48px cells. */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--menu-columns, 6), 48px);
+  gap: var(--mild-space-1);
+  padding-inline: var(--mild-space-2);
+}
+
+.grid > .header { grid-column: 1 / -1; padding-inline: var(--mild-space-2); }
+
+.grid > .item {
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  min-height: 48px;
+  padding: 0;
+  border-radius: var(--md-sys-shape-corner-small);
+}
+
+.grid > .item::after { border-radius: inherit; }
+.grid > .item .text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; padding: 0; }
+.grid > .item .icon { width: 28px; height: 28px; }
+
+/*
+ * Column alignment: when any row has a selection mark or a leading icon, every list row reserves
+ * that column so labels and icons line up (grid sections are exempt).
+ */
+.menu:has(.selection) .item:not(:has(> .selection)):not(.grid > .item) { padding-inline-start: calc(var(--mild-space-4) + 24px + var(--mild-space-3)); }
+.menu:has(.item[data-has-icon]:not(.grid > .item)) .item:not([data-has-icon]):not(.grid > .item) .text { margin-inline-start: calc(24px + var(--mild-space-3)); }

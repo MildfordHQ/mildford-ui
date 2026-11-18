@@ -1,0 +1,37 @@
+.popover {
+  z-index: var(--mild-z-popover);
+  min-width: 160px;
+  max-width: min(400px, calc(100vw - 32px));
+  color: var(--mild-color-text);
+  background: var(--md-sys-color-surface-container);
+  border-radius: var(--md-sys-shape-corner-medium);
+  box-shadow: var(--mild-elevation-2);
+  font: var(--mild-type-body-medium);
+  letter-spacing: var(--mild-tracking-body-medium);
+  transition: opacity var(--mild-motion-medium) var(--mild-easing-standard), transform var(--mild-motion-medium) var(--mild-easing-standard);
+}
+
+.popover[data-entering],
+.popover[data-exiting] {
+  opacity: 0;
+}
+
+.popover[data-entering][data-placement="bottom"] { transform: translateY(-4px); }
+.popover[data-entering][data-placement="top"] { transform: translateY(4px); }
+.popover[data-entering][data-placement="left"] { transform: translateX(4px); }
+.popover[data-entering][data-placement="right"] { transform: translateX(-4px); }
+
+.dialog {
+  padding: var(--mild-space-3);
+  outline: none;
+}
+
+.arrow svg {
+  display: block;
+  fill: var(--md-sys-color-surface-container);
+}
+
+.arrow[data-placement="top"] svg { transform: none; }
+.arrow[data-placement="bottom"] svg { transform: rotate(180deg); }
+.arrow[data-placement="left"] svg { transform: rotate(-90deg); }
+.arrow[data-placement="right"] svg { transform: rotate(90deg); }

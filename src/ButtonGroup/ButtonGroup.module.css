@@ -1,0 +1,14 @@
+.group {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mild-space-1);
+}
+
+.group[data-orientation="vertical"] { flex-direction: column; }
+
+.connected { gap: 2px; }
+.connected > * { border-radius: var(--md-sys-shape-corner-small); }
+.connected[data-orientation="horizontal"] > :first-child { border-start-start-radius: var(--md-sys-shape-corner-full); border-end-start-radius: var(--md-sys-shape-corner-full); }
+.connected[data-orientation="horizontal"] > :last-child { border-start-end-radius: var(--md-sys-shape-corner-full); border-end-end-radius: var(--md-sys-shape-corner-full); }
+.connected[data-orientation="vertical"] > :first-child { border-start-start-radius: var(--md-sys-shape-corner-full); border-start-end-radius: var(--md-sys-shape-corner-full); }
+.connected[data-orientation="vertical"] > :last-child { border-end-start-radius: var(--md-sys-shape-corner-full); border-end-end-radius: var(--md-sys-shape-corner-full); }

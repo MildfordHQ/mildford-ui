@@ -1,0 +1,17 @@
+.stepper { margin: 0; padding: 0; color: var(--mild-color-text); font-family: var(--mild-font-family); list-style: none; }
+.horizontal { display: flex; }
+.step { position: relative; display: flex; gap: var(--mild-space-3); min-width: 0; flex: 1; }
+.horizontal .step:not(:last-child)::after { content: ''; position: absolute; top: 15px; left: 40px; right: var(--mild-space-2); height: 2px; background: var(--mild-color-border); }
+.marker { z-index: 1; width: 32px; height: 32px; display: grid; place-items: center; flex: 0 0 auto; color: var(--mild-color-text-muted); background: var(--mild-color-surface); border: 2px solid var(--mild-color-border); border-radius: 50%; font-size: var(--mild-font-size-xs); font-weight: var(--mild-font-weight-semibold); }
+.copy { min-width: 0; display: grid; gap: 2px; padding-right: var(--mild-space-4); }
+.label { font-size: var(--mild-font-size-sm); font-weight: var(--mild-font-weight-semibold); }
+.description { color: var(--mild-color-text-muted); font-size: var(--mild-font-size-xs); }
+.state { color: var(--mild-color-text-muted); font-size: 11px; text-transform: capitalize; }
+.complete .marker { color: var(--mild-color-success); background: var(--mild-color-success-container); border-color: var(--mild-color-success); }
+.current .marker { color: var(--mild-color-action-on); background: var(--mild-color-action); border-color: var(--mild-color-action); box-shadow: var(--mild-focus-ring); }
+.error .marker { color: var(--md-sys-color-on-error); background: var(--mild-color-error); border-color: var(--mild-color-error); }
+.horizontal .complete:not(:last-child)::after { background: var(--mild-color-success); }
+.vertical { display: grid; gap: var(--mild-space-5); }
+.vertical .step:not(:last-child)::after { content: ''; position: absolute; top: 38px; bottom: calc(-1 * var(--mild-space-4)); left: 15px; width: 2px; background: var(--mild-color-border); }
+.vertical .complete:not(:last-child)::after { background: var(--mild-color-success); }
+@media (max-width: 700px) { .horizontal { display: grid; gap: var(--mild-space-4); } .horizontal .step:not(:last-child)::after { top: 38px; bottom: calc(-1 * var(--mild-space-3)); left: 15px; right: auto; width: 2px; height: auto; } }

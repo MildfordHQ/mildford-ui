@@ -1,0 +1,114 @@
+.field {
+  display: inline-grid;
+  gap: var(--mild-space-2);
+  min-width: 0;
+  color: var(--mild-color-text);
+  font-family: var(--mild-font-family);
+}
+
+.label { font-size: var(--mild-font-size-sm); font-weight: var(--mild-font-weight-medium); }
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mild-space-2);
+  min-height: var(--mild-control-height-md);
+  padding: 6px 12px;
+  box-sizing: border-box;
+  color: var(--md-sys-color-on-surface);
+  background: transparent;
+  border: 1px solid var(--mild-color-border-strong);
+  border-radius: var(--md-sys-shape-corner-medium);
+  font: var(--mild-font-weight-medium) 13px/1.2 var(--mild-font-family);
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  transition: background-color var(--mild-motion-fast), border-color var(--mild-motion-fast);
+}
+
+.trigger[data-hovered] { background: var(--mild-color-surface-subtle); }
+.trigger[data-focus-visible] { outline: 2px solid var(--mild-focus-color); outline-offset: 2px; box-shadow: var(--mild-focus-ring); }
+.trigger[data-disabled] { opacity: 0.38; cursor: not-allowed; }
+.field[data-invalid] .trigger { border-color: var(--mild-color-error); }
+
+.value { flex: 1; min-width: 0; overflow: hidden; text-align: start; text-overflow: ellipsis; white-space: nowrap; }
+.value[data-placeholder] { color: var(--mild-color-text-muted); }
+
+.chevron {
+  flex: none;
+  fill: currentColor;
+  transition: transform var(--mild-motion-medium) var(--mild-easing-standard);
+}
+
+.field[data-open] .chevron { transform: rotate(180deg); }
+
+.helper, .error { font-size: var(--mild-font-size-xs); line-height: 1.4; }
+.helper { color: var(--mild-color-text-muted); }
+.error { color: var(--mild-color-error); }
+
+.popover {
+  z-index: var(--mild-z-popover);
+  min-width: max(220px, var(--trigger-width));
+  max-width: 360px;
+  max-height: 400px;
+  overflow: auto;
+  color: var(--mild-color-text);
+  background: var(--md-sys-color-surface-container);
+  border-radius: var(--md-sys-shape-corner-medium);
+  box-shadow: var(--mild-elevation-2);
+  transition: opacity var(--mild-motion-fast) var(--mild-easing-standard);
+}
+
+.popover[data-entering], .popover[data-exiting] { opacity: 0; }
+
+.listbox {
+  display: flex;
+  flex-direction: column;
+  padding: var(--mild-space-2) 0;
+  outline: none;
+  font: var(--mild-type-body-medium);
+  letter-spacing: var(--mild-tracking-body-medium);
+}
+
+.section { display: flex; flex-direction: column; }
+.section + .section { margin-top: var(--mild-space-2); padding-top: var(--mild-space-2); border-top: 1px solid var(--md-sys-color-outline-variant); }
+
+.header {
+  padding: var(--mild-space-1) var(--mild-space-4);
+  color: var(--mild-color-text-muted);
+  font: var(--mild-type-label-medium);
+  letter-spacing: var(--mild-tracking-label-medium);
+}
+
+.item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--mild-space-3);
+  min-height: 44px;
+  padding: 0 var(--mild-space-4);
+  box-sizing: border-box;
+  cursor: default;
+  outline: none;
+}
+
+.item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: currentColor;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.item[data-hovered]::after, .item[data-focused]::after { opacity: var(--mild-state-hover); }
+.item[data-pressed]::after { opacity: var(--mild-state-pressed); }
+.item[data-focus-visible] { outline: 2px solid var(--mild-focus-color); outline-offset: -2px; }
+.item[data-selected] { color: var(--mild-color-on-selected); background: var(--mild-color-selected); font-weight: var(--mild-font-weight-medium); }
+.item[data-disabled] { color: color-mix(in srgb, var(--md-sys-color-on-surface) 38%, transparent); }
+
+.icon { display: inline-grid; flex: none; place-items: center; width: 24px; height: 24px; }
+.text { display: flex; flex: 1; flex-direction: column; min-width: 0; padding: var(--mild-space-2) 0; }
+.description { color: var(--mild-color-text-muted); font: var(--mild-type-body-small); }
+.item[data-selected] .description { color: inherit; }
+.check { flex: none; fill: currentColor; }

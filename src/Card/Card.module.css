@@ -1,0 +1,12 @@
+.card { box-sizing: border-box; min-width: 0; color: var(--mild-color-text); font-family: var(--mild-font-family); background: var(--mild-color-surface); border: 1px solid var(--mild-color-border); border-radius: var(--mild-card-radius); box-shadow: none; }
+.withShade { box-shadow: var(--mild-elevation-2); }
+.none { padding: 0; }
+.compact { padding: var(--mild-space-4); }
+.default { padding: var(--mild-space-6); }
+.spacious { padding: clamp(24px, 4vw, 40px); }
+.metric { display: grid; gap: var(--mild-space-3); }
+.metricLabel { color: var(--mild-color-text-muted); font: var(--mild-font-weight-medium) var(--mild-font-size-sm)/1.4 var(--mild-font-family); }
+.metricRow { display: flex; align-items: baseline; gap: var(--mild-space-3); flex-wrap: wrap; }
+.metricValue { font: var(--mild-font-weight-semibold) var(--mild-font-size-xl)/var(--mild-line-height-tight) var(--mild-font-family); letter-spacing: -.02em; }
+.trend { color: var(--mild-color-text-muted); font-size: var(--mild-font-size-sm); }
+.supporting { color: var(--mild-color-text-muted); font-size: var(--mild-font-size-xs); }

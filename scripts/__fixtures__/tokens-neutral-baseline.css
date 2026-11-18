@@ -1,0 +1,171 @@
+/* Mildford UI tokens: Material-compatible references -> semantic roles -> component/layout aliases. */
+:root,
+[data-theme="light"] {
+  color-scheme: light;
+
+  /* Tier 1: Material reference/system tokens (existing names remain stable). */
+  --md-sys-color-primary: #171717;
+  --md-sys-color-on-primary: #ffffff;
+  --md-sys-color-primary-container: #ececec;
+  --md-sys-color-on-primary-container: #202020;
+  --md-sys-color-surface: #f7f7f7;
+  --md-sys-color-on-surface: #171717;
+  --md-sys-color-surface-container: #f2f2f2;
+  --md-sys-color-surface-container-high: #e7e7e7;
+  --md-sys-color-on-surface-variant: #5f5f5f;
+  --md-sys-color-outline: #707070;
+  --md-sys-color-outline-variant: #c9c9c9;
+  --md-sys-color-inverse-surface: #2b2b2b;
+  --md-sys-color-inverse-on-surface: #f5f5f5;
+  --md-sys-color-inverse-primary: #f5f5f5;
+  --md-sys-color-error: #a32323;
+  --md-sys-color-on-error: #ffffff;
+  --md-sys-color-error-container: #fde3e3;
+  --md-sys-color-on-error-container: #5f1111;
+
+  /* Tier 2: semantic roles. */
+  --mild-color-canvas: var(--md-sys-color-surface);
+  --mild-color-surface: #ffffff;
+  --mild-color-surface-subtle: #f3f3f3;
+  --mild-color-surface-raised: #ffffff;
+  --mild-color-text: var(--md-sys-color-on-surface);
+  --mild-color-text-muted: var(--md-sys-color-on-surface-variant);
+  --mild-color-border: var(--md-sys-color-outline-variant);
+  --mild-color-divider: #dedede;
+  --mild-color-border-strong: var(--md-sys-color-outline);
+  --mild-color-action: var(--md-sys-color-primary);
+  --mild-color-action-on: var(--md-sys-color-on-primary);
+  --mild-color-action-container: var(--md-sys-color-primary-container);
+  --mild-color-action-on-container: var(--md-sys-color-on-primary-container);
+  --mild-color-accent: #3f3f3f;
+  --mild-color-accent-container: #ececec;
+  --mild-color-info: #3f3f3f;
+  --mild-color-info-container: #ececec;
+  --mild-color-success: #246b36;
+  --mild-color-success-container: #dff4e4;
+  --mild-color-warning: #6b4b00;
+  --mild-color-warning-container: #fff0cc;
+  --mild-color-error: var(--md-sys-color-error);
+  --mild-color-error-container: var(--md-sys-color-error-container);
+  --mild-color-overlay: rgb(0 0 0 / 0.48);
+  --mild-focus-color: #2d2d2d;
+  --mild-shadow-color: rgb(0 0 0 / 0.12);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --md-sys-color-primary: #f5f5f5;
+  --md-sys-color-on-primary: #171717;
+  --md-sys-color-primary-container: #343434;
+  --md-sys-color-on-primary-container: #f5f5f5;
+  --md-sys-color-surface: #111111;
+  --md-sys-color-on-surface: #f5f5f5;
+  --md-sys-color-surface-container: #1d1d1d;
+  --md-sys-color-surface-container-high: #292929;
+  --md-sys-color-on-surface-variant: #b8b8b8;
+  --md-sys-color-outline: #b0b0b0;
+  --md-sys-color-outline-variant: #737373;
+  --md-sys-color-inverse-surface: #f5f5f5;
+  --md-sys-color-inverse-on-surface: #1c1c1c;
+  --md-sys-color-inverse-primary: #1c1c1c;
+  --md-sys-color-error: #ffb4ab;
+  --md-sys-color-on-error: #690005;
+  --md-sys-color-error-container: #5f1919;
+  --md-sys-color-on-error-container: #ffdada;
+
+  --mild-color-canvas: var(--md-sys-color-surface);
+  --mild-color-surface: #191919;
+  --mild-color-surface-subtle: #242424;
+  --mild-color-surface-raised: #262626;
+  --mild-color-text: var(--md-sys-color-on-surface);
+  --mild-color-text-muted: var(--md-sys-color-on-surface-variant);
+  --mild-color-border: var(--md-sys-color-outline-variant);
+  --mild-color-divider: #3a3a3a;
+  --mild-color-border-strong: var(--md-sys-color-outline);
+  --mild-color-action: var(--md-sys-color-primary);
+  --mild-color-action-on: var(--md-sys-color-on-primary);
+  --mild-color-action-container: var(--md-sys-color-primary-container);
+  --mild-color-action-on-container: var(--md-sys-color-on-primary-container);
+  --mild-color-accent: #e5e5e5;
+  --mild-color-accent-container: #303030;
+  --mild-color-info: #e5e5e5;
+  --mild-color-info-container: #303030;
+  --mild-color-success: #a8e5b4;
+  --mild-color-success-container: #1f4628;
+  --mild-color-warning: #ffd88a;
+  --mild-color-warning-container: #493500;
+  --mild-color-error: var(--md-sys-color-error);
+  --mild-color-error-container: var(--md-sys-color-error-container);
+  --mild-color-overlay: rgb(0 0 0 / 0.72);
+  --mild-focus-color: #f5f5f5;
+  --mild-shadow-color: rgb(0 0 0 / 0.56);
+}
+
+:root {
+  /* Tier 1: shape and state references. */
+  --md-sys-shape-corner-small: 8px;
+  --md-sys-shape-corner-medium: 12px;
+  --md-sys-shape-corner-large: 16px;
+  --md-sys-shape-corner-extra-large: 28px;
+  --md-sys-shape-corner-full: 50px;
+  --md-state-hover-opacity: 0.08;
+  --md-state-pressed-opacity: 0.12;
+  --md-state-focus-opacity: 0.12;
+
+  /* Tier 2: spacing, typography, motion, elevation, and focus roles. */
+  --mild-space-0: 0;
+  --mild-space-1: 4px;
+  --mild-space-2: 8px;
+  --mild-space-3: 12px;
+  --mild-space-4: 16px;
+  --mild-space-5: 20px;
+  --mild-space-6: 24px;
+  --mild-space-8: 32px;
+  --mild-space-10: 40px;
+  --mild-space-12: 48px;
+  --mild-space-16: 64px;
+  --mild-font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mild-font-size-xs: 0.75rem;
+  --mild-font-size-sm: 0.875rem;
+  --mild-font-size-md: 1rem;
+  --mild-font-size-lg: 1.25rem;
+  --mild-font-size-xl: clamp(1.5rem, 2vw, 2rem);
+  --mild-line-height-tight: 1.2;
+  --mild-line-height-body: 1.5;
+  --mild-font-weight-medium: 500;
+  --mild-font-weight-semibold: 650;
+  --mild-motion-fast: 120ms;
+  --mild-motion-medium: 200ms;
+  --mild-easing-standard: cubic-bezier(0.2, 0, 0, 1);
+  --mild-elevation-1: 0 1px 2px var(--mild-shadow-color), 0 1px 3px var(--mild-shadow-color);
+  --mild-elevation-2: 0 8px 24px var(--mild-shadow-color);
+  --mild-focus-ring: 0 0 0 3px color-mix(in srgb, var(--mild-focus-color) 34%, transparent);
+
+  /* Tier 3: component and layout aliases. */
+  --mild-control-height-sm: 40px;
+  --mild-control-height-md: 44px;
+  --mild-control-height-lg: 52px;
+  --mild-control-radius: var(--md-sys-shape-corner-medium);
+  --mild-card-radius: var(--md-sys-shape-corner-large);
+  --mild-page-gutter: clamp(16px, 3vw, 40px);
+  --mild-container-sm: 720px;
+  --mild-container-md: 1040px;
+  --mild-container-lg: 1440px;
+  --mild-sidebar-width: 248px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --mild-motion-fast: 0ms;
+    --mild-motion-medium: 0ms;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,21 @@
+.alert { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: start; gap: var(--mild-space-3); padding: var(--mild-space-4); border: 1px solid currentColor; border-radius: var(--mild-control-radius); font: var(--mild-font-size-sm)/var(--mild-line-height-body) var(--mild-font-family); }
+.info { color: var(--mild-color-info); background: var(--mild-color-info-container); }
+.success { color: var(--mild-color-success); background: var(--mild-color-success-container); }
+.warning { color: var(--mild-color-warning); background: var(--mild-color-warning-container); }
+.error { color: var(--mild-color-error); background: var(--mild-color-error-container); }
+.alertIcon { display: grid; place-items: center; width: 22px; height: 22px; border: 1px solid currentColor; border-radius: 50%; font-weight: 700; }
+.alertBody { display: grid; gap: var(--mild-space-1); }
+.alertActions { display: flex; gap: var(--mild-space-2); }
+.empty { display: grid; justify-items: center; gap: var(--mild-space-3); padding: clamp(32px, 8vw, 72px) var(--mild-space-6); color: var(--mild-color-text); text-align: center; border: 1px dashed var(--mild-color-border); border-radius: var(--mild-card-radius); }
+.empty h3, .empty p { margin: 0; }
+.empty p { max-width: 52ch; color: var(--mild-color-text-muted); }
+.emptyIcon { display: grid; place-items: center; width: 52px; height: 52px; color: var(--mild-color-action); background: var(--mild-color-action-container); border-radius: 50%; font-size: 24px; }
+.emptyActions { display: flex; gap: var(--mild-space-2); margin-top: var(--mild-space-2); flex-wrap: wrap; justify-content: center; }
+.spinnerWrap { display: inline-grid; place-items: center; }
+.spinner { border: 3px solid var(--mild-color-border); border-top-color: var(--mild-color-action); border-radius: 50%; animation: spin .8s linear infinite; }
+.small { width: 16px; height: 16px; border-width: 2px; }
+.medium { width: 24px; height: 24px; }
+.large { width: 40px; height: 40px; border-width: 4px; }
+.visuallyHidden { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (max-width: 560px) { .alert { grid-template-columns: auto 1fr; } .alertActions { grid-column: 2; } }

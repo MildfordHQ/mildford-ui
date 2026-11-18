@@ -1,0 +1,5 @@
+.nav { display: inline-flex; max-width: 100%; gap: var(--mild-space-1); padding: var(--mild-space-1); overflow-x: auto; background: var(--mild-color-surface-subtle); border: 1px solid var(--mild-color-border); border-radius: var(--md-sys-shape-corner-large); font-family: var(--mild-font-family); }
+.link { min-height: 40px; display: inline-flex; align-items: center; justify-content: center; padding: 0 var(--mild-space-3); flex: 0 0 auto; color: var(--mild-color-text-muted); border-radius: var(--md-sys-shape-corner-medium); text-decoration: none; font-size: var(--mild-font-size-sm); font-weight: var(--mild-font-weight-medium); }
+.link:hover { color: var(--mild-color-text); background: var(--mild-color-surface); }
+.link:focus-visible { outline: 2px solid var(--mild-focus-color); outline-offset: 1px; }
+.current { color: var(--mild-color-action-on-container); background: var(--mild-color-action-container); box-shadow: var(--mild-elevation-1); }

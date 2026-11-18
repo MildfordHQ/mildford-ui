@@ -1,0 +1,106 @@
+/* M3 assist / filter chips: 32px, corner.full, label-large, 20px leading icon, 44px touch target. */
+.chip {
+  --chip-color: var(--md-sys-color-on-surface-variant);
+  --chip-bg: transparent;
+  --chip-border: var(--md-sys-color-outline-variant);
+  --chip-icon-color: var(--md-sys-color-primary);
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: var(--mild-space-2);
+  height: 32px;
+  padding: 0 var(--mild-space-4);
+  box-sizing: border-box;
+  color: var(--chip-color);
+  background: var(--chip-bg);
+  border: 1px solid var(--chip-border);
+  border-radius: var(--md-sys-shape-corner-full);
+  font: var(--mild-type-label-large);
+  letter-spacing: var(--mild-tracking-label-large);
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  transition:
+    background-color var(--mild-motion-fast) var(--mild-easing-standard),
+    border-color var(--mild-motion-fast) var(--mild-easing-standard),
+    color var(--mild-motion-fast) var(--mild-easing-standard);
+}
+
+.withIcon,
+.filter[data-selected] { padding-inline-start: var(--mild-space-2); }
+
+.icon {
+  display: inline-flex;
+  flex: none;
+  color: var(--chip-icon-color);
+}
+
+.icon > svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+.label { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+
+/* Interactive chips: 44px target, state layer, focus ring. */
+.interactive { cursor: pointer; }
+
+.interactive::before {
+  content: "";
+  position: absolute;
+  inset: -7px 0;
+}
+
+.interactive::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: var(--chip-color);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--mild-motion-fast) var(--mild-easing-standard);
+}
+
+.interactive[data-hovered]::after { opacity: var(--mild-state-hover); }
+.interactive[data-pressed]::after { opacity: var(--mild-state-pressed); }
+.interactive[data-focus-visible] { outline: 2px solid var(--mild-focus-color); outline-offset: 2px; }
+
+.assist { --chip-color: var(--md-sys-color-on-surface); }
+
+.elevated {
+  --chip-bg: var(--md-sys-color-surface-container-low);
+  --chip-border: transparent;
+  box-shadow: var(--mild-elevation-1);
+}
+
+.filter[data-selected] {
+  --chip-color: var(--md-sys-color-on-secondary-container);
+  --chip-bg: var(--md-sys-color-secondary-container);
+  --chip-border: transparent;
+  --chip-icon-color: var(--md-sys-color-on-secondary-container);
+}
+
+.check {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+.interactive[data-disabled] {
+  --chip-color: color-mix(in srgb, var(--md-sys-color-on-surface) 38%, transparent);
+  --chip-icon-color: var(--chip-color);
+  --chip-border: color-mix(in srgb, var(--md-sys-color-on-surface) 12%, transparent);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.elevated[data-disabled],
+.filter[data-selected][data-disabled] {
+  --chip-bg: color-mix(in srgb, var(--md-sys-color-on-surface) 12%, transparent);
+  --chip-border: transparent;
+}

@@ -1,0 +1,32 @@
+/* Selected colors per M3 toggle icon button variant; base sizing lives in IconButton.module.css. */
+.standard[data-selected] { --icon-button-color: var(--md-sys-color-primary); }
+
+.filled:not([data-selected]) { --icon-button-color: var(--md-sys-color-primary); --icon-button-bg: var(--md-sys-color-surface-container-highest); }
+.filled[data-selected] { --icon-button-color: var(--md-sys-color-on-primary); --icon-button-bg: var(--md-sys-color-primary); }
+
+.tonal:not([data-selected]) { --icon-button-color: var(--md-sys-color-on-surface-variant); --icon-button-bg: var(--md-sys-color-surface-container-highest); }
+.tonal[data-selected] { --icon-button-color: var(--mild-color-on-selected); --icon-button-bg: var(--mild-color-selected); }
+
+.outlined[data-selected] { --icon-button-color: var(--md-sys-color-inverse-on-surface); --icon-button-bg: var(--md-sys-color-inverse-surface); --icon-button-border: var(--md-sys-color-inverse-surface); }
+
+/* Expressive shape morph: pill ↔ rounded square on selection. */
+.morph[data-selected] { border-radius: var(--md-sys-shape-corner-medium); }
+
+.group {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mild-space-1);
+}
+
+.group[data-orientation="vertical"] { flex-direction: column; }
+
+/* Connected: 2px gaps, outer corners full, inner corners small. */
+.connected { gap: 2px; }
+.connected > * { border-radius: var(--md-sys-shape-corner-small); }
+.connected[data-orientation="horizontal"] > :first-child,
+.connected:not([data-orientation]) > :first-child { border-start-start-radius: var(--md-sys-shape-corner-full); border-end-start-radius: var(--md-sys-shape-corner-full); }
+.connected[data-orientation="horizontal"] > :last-child,
+.connected:not([data-orientation]) > :last-child { border-start-end-radius: var(--md-sys-shape-corner-full); border-end-end-radius: var(--md-sys-shape-corner-full); }
+.connected[data-orientation="vertical"] > :first-child { border-start-start-radius: var(--md-sys-shape-corner-full); border-start-end-radius: var(--md-sys-shape-corner-full); }
+.connected[data-orientation="vertical"] > :last-child { border-end-start-radius: var(--md-sys-shape-corner-full); border-end-end-radius: var(--md-sys-shape-corner-full); }
+.connected > [data-selected] { border-radius: var(--md-sys-shape-corner-full); }

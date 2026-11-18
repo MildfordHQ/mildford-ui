@@ -1,0 +1,89 @@
+/* M3 icon button: 40px visual (32px dense), 44px touch target, state layer, morph. */
+.button {
+  --icon-button-size: 40px;
+  --icon-button-color: var(--md-sys-color-on-surface-variant);
+  --icon-button-bg: transparent;
+  --icon-button-border: transparent;
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mild-space-2);
+  min-width: var(--icon-button-size);
+  height: var(--icon-button-size);
+  padding: 0;
+  box-sizing: border-box;
+  color: var(--icon-button-color);
+  background: var(--icon-button-bg);
+  border: 1px solid var(--icon-button-border);
+  border-radius: var(--md-sys-shape-corner-full);
+  font: var(--mild-type-label-large);
+  letter-spacing: var(--mild-tracking-label-large);
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  transition:
+    border-radius var(--mild-motion-expressive-spatial),
+    background-color var(--mild-motion-fast) var(--mild-easing-standard),
+    color var(--mild-motion-fast) var(--mild-easing-standard);
+}
+
+/* Effective 44px target without changing the visual size. */
+.button::before {
+  content: "";
+  position: absolute;
+  inset: min(0px, calc((var(--icon-button-size) - 44px) / 2));
+}
+
+/* State layer: currentColor at the M3 state opacities. */
+.button::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: currentColor;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--mild-motion-fast) var(--mild-easing-standard);
+}
+
+.button[data-hovered]::after { opacity: var(--mild-state-hover); }
+.button[data-pressed]::after { opacity: var(--mild-state-pressed); }
+.button[data-focus-visible] { outline: 2px solid var(--mild-focus-color); outline-offset: 2px; }
+.button[data-pressed]:not([data-disabled]) { border-radius: var(--md-sys-shape-corner-medium); }
+
+.button[data-disabled] {
+  --icon-button-color: color-mix(in srgb, var(--md-sys-color-on-surface) 38%, transparent);
+  cursor: not-allowed;
+}
+
+.button[data-disabled]:not(.standard) {
+  --icon-button-bg: color-mix(in srgb, var(--md-sys-color-on-surface) 12%, transparent);
+}
+
+.button[data-disabled].outlined {
+  --icon-button-bg: transparent;
+  --icon-button-border: color-mix(in srgb, var(--md-sys-color-on-surface) 12%, transparent);
+}
+
+.sm { --icon-button-size: 32px; }
+.md { --icon-button-size: 40px; }
+
+.filled { --icon-button-color: var(--md-sys-color-on-primary); --icon-button-bg: var(--md-sys-color-primary); }
+.tonal { --icon-button-color: var(--md-sys-color-on-secondary-container); --icon-button-bg: var(--md-sys-color-secondary-container); }
+.outlined { --icon-button-border: var(--md-sys-color-outline); }
+
+/* Text content (segmented toggles, text buttons in bars). */
+.withText { padding: 0 var(--mild-space-3); }
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

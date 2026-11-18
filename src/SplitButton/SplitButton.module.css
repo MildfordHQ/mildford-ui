@@ -1,0 +1,82 @@
+.split {
+  --split-fg: var(--md-sys-color-on-primary);
+  --split-bg: var(--md-sys-color-primary);
+  --split-border: transparent;
+  display: inline-flex;
+  align-items: stretch;
+  gap: 2px;
+  height: 40px;
+}
+
+.tonal { --split-fg: var(--md-sys-color-on-secondary-container); --split-bg: var(--md-sys-color-secondary-container); }
+.outlined { --split-fg: var(--md-sys-color-on-surface-variant); --split-bg: transparent; --split-border: var(--md-sys-color-outline-variant); }
+
+.segment {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mild-space-2);
+  box-sizing: border-box;
+  color: var(--split-fg);
+  background: var(--split-bg);
+  border: 1px solid var(--split-border);
+  font: var(--mild-type-label-large);
+  letter-spacing: var(--mild-tracking-label-large);
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+  transition: border-radius var(--mild-motion-expressive-spatial), background-color var(--mild-motion-fast) var(--mild-easing-standard);
+}
+
+/* 44px touch target around the 40px visual height. */
+.segment::before { content: ""; position: absolute; inset: -2px 0; }
+
+.segment::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: currentColor;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--mild-motion-fast) var(--mild-easing-standard);
+}
+
+.segment[data-hovered]::after { opacity: var(--mild-state-hover); }
+.segment[data-pressed]::after { opacity: var(--mild-state-pressed); }
+.segment[data-focus-visible] { outline: 2px solid var(--mild-focus-color); outline-offset: 2px; }
+
+.segment[data-disabled] {
+  color: color-mix(in srgb, var(--md-sys-color-on-surface) 38%, transparent);
+  background: color-mix(in srgb, var(--md-sys-color-on-surface) 12%, transparent);
+  cursor: not-allowed;
+}
+
+.outlined .segment[data-disabled] { background: transparent; }
+
+.leading {
+  padding: 0 var(--mild-space-4) 0 var(--mild-space-4);
+  border-radius: var(--md-sys-shape-corner-full) var(--md-sys-shape-corner-extra-small) var(--md-sys-shape-corner-extra-small) var(--md-sys-shape-corner-full);
+}
+
+.leading:has(.icon) { padding-left: var(--mild-space-3); }
+
+.trailing {
+  width: 40px;
+  padding: 0;
+  border-radius: var(--md-sys-shape-corner-extra-small) var(--md-sys-shape-corner-full) var(--md-sys-shape-corner-full) var(--md-sys-shape-corner-extra-small);
+}
+
+/* Expressive: the trailing half rounds fully while its menu is open. */
+.trailing[aria-expanded="true"] { border-radius: var(--md-sys-shape-corner-full); }
+
+.icon { display: inline-grid; place-items: center; width: 20px; height: 20px; }
+.icon svg { width: 20px; height: 20px; fill: currentColor; }
+
+.chevron {
+  fill: currentColor;
+  transition: transform var(--mild-motion-medium) var(--mild-easing-standard);
+}
+
+.trailing[aria-expanded="true"] .chevron { transform: rotate(180deg); }

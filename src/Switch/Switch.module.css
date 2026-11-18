@@ -1,0 +1,107 @@
+/* M3 switch: 52×32 track, handle 16 → 24 (selected) → 28 (pressed), 40px state layer. */
+.switch {
+  --switch-track-bg: var(--md-sys-color-surface-container-highest);
+  --switch-track-border: var(--md-sys-color-outline);
+  --switch-handle-bg: var(--md-sys-color-outline);
+  --switch-handle-size: 16px;
+  /* Handle centre measured from the track's inner (border-box minus 2px border) start edge. */
+  --switch-handle-center: 14px;
+  --switch-state-color: var(--md-sys-color-on-surface);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mild-space-4);
+  min-height: 44px;
+  color: var(--mild-color-text);
+  font: var(--mild-type-body-medium);
+  letter-spacing: var(--mild-tracking-body-medium);
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Panel rows: label at the start, track at the end. */
+.withLabel {
+  display: flex;
+  justify-content: space-between;
+}
+
+.label { min-width: 0; }
+
+.track {
+  position: relative;
+  flex: none;
+  box-sizing: border-box;
+  width: 52px;
+  height: 32px;
+  background: var(--switch-track-bg);
+  border: 2px solid var(--switch-track-border);
+  border-radius: var(--md-sys-shape-corner-full);
+  transition:
+    background-color var(--mild-motion-fast) var(--mild-easing-standard),
+    border-color var(--mild-motion-fast) var(--mild-easing-standard);
+}
+
+.handle {
+  position: absolute;
+  top: 50%;
+  inset-inline-start: calc(var(--switch-handle-center) - var(--switch-handle-size) / 2);
+  width: var(--switch-handle-size);
+  height: var(--switch-handle-size);
+  margin-top: calc(var(--switch-handle-size) / -2);
+  background: var(--switch-handle-bg);
+  border-radius: var(--md-sys-shape-corner-full);
+  transition:
+    inset-inline-start var(--mild-motion-expressive-spatial),
+    width var(--mild-motion-expressive-spatial),
+    height var(--mild-motion-expressive-spatial),
+    margin-top var(--mild-motion-expressive-spatial),
+    background-color var(--mild-motion-fast) var(--mild-easing-standard);
+}
+
+/* State layer: a 40px circle centred on the handle. */
+.handle::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  border-radius: var(--md-sys-shape-corner-full);
+  background: var(--switch-state-color);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--mild-motion-fast) var(--mild-easing-standard);
+}
+
+.switch[data-selected] {
+  --switch-track-bg: var(--md-sys-color-primary);
+  --switch-track-border: var(--md-sys-color-primary);
+  --switch-handle-bg: var(--md-sys-color-on-primary);
+  --switch-handle-size: 24px;
+  --switch-handle-center: 34px;
+  --switch-state-color: var(--md-sys-color-primary);
+}
+
+.switch[data-hovered]:not([data-disabled]) .handle::before { opacity: var(--mild-state-hover); }
+.switch[data-pressed]:not([data-disabled]) .handle::before { opacity: var(--mild-state-pressed); }
+.switch[data-pressed]:not([data-disabled]) { --switch-handle-size: 28px; }
+
+.switch[data-hovered]:not([data-selected], [data-disabled]) { --switch-handle-bg: var(--md-sys-color-on-surface-variant); }
+.switch[data-hovered][data-selected]:not([data-disabled]) { --switch-handle-bg: var(--md-sys-color-primary-container); }
+
+.switch[data-focus-visible] .track { outline: 2px solid var(--mild-focus-color); outline-offset: 2px; }
+
+.switch[data-disabled] {
+  --switch-track-bg: color-mix(in srgb, var(--md-sys-color-surface-container-highest) 12%, transparent);
+  --switch-track-border: color-mix(in srgb, var(--md-sys-color-on-surface) 12%, transparent);
+  --switch-handle-bg: color-mix(in srgb, var(--md-sys-color-on-surface) 38%, transparent);
+  color: color-mix(in srgb, var(--md-sys-color-on-surface) 38%, transparent);
+  cursor: not-allowed;
+}
+
+.switch[data-disabled][data-selected] {
+  --switch-track-bg: color-mix(in srgb, var(--md-sys-color-on-surface) 12%, transparent);
+  --switch-track-border: transparent;
+  --switch-handle-bg: var(--md-sys-color-surface);
+}

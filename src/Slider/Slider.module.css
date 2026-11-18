@@ -1,0 +1,90 @@
+/* M3 slider: 4px track, 16px primary thumb. Fills its container; consumers set the width. */
+.slider {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mild-space-1);
+  min-width: 0;
+  color: var(--mild-color-text);
+}
+
+.header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--mild-space-2);
+}
+
+.label {
+  font: var(--mild-type-body-medium);
+  letter-spacing: var(--mild-tracking-body-medium);
+}
+
+.output {
+  font: var(--mild-type-label-medium);
+  letter-spacing: var(--mild-tracking-label-medium);
+  color: var(--mild-color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.track {
+  position: relative;
+  height: 4px;
+  /* Room for the thumb at both ends so it never overhangs the container. */
+  margin: 14px 8px;
+  background: var(--md-sys-color-secondary-container);
+  border-radius: var(--md-sys-shape-corner-full);
+  cursor: pointer;
+  touch-action: none;
+}
+
+/* 32px-tall hit area around the 4px track. */
+.track::before {
+  content: "";
+  position: absolute;
+  inset: -14px -8px;
+}
+
+.fill {
+  background: var(--md-sys-color-primary);
+  border-radius: var(--md-sys-shape-corner-full);
+}
+
+.thumb {
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  background: var(--md-sys-color-primary);
+  border-radius: var(--md-sys-shape-corner-full);
+  transition: box-shadow var(--mild-motion-fast) var(--mild-easing-standard);
+}
+
+/* State layer: 40px halo in primary. */
+.thumb::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  border-radius: var(--md-sys-shape-corner-full);
+  background: var(--md-sys-color-primary);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--mild-motion-fast) var(--mild-easing-standard);
+}
+
+.thumb[data-hovered]::after { opacity: var(--mild-state-hover); }
+.thumb[data-dragging]::after { opacity: var(--mild-state-pressed); }
+.thumb[data-focus-visible] { outline: 2px solid var(--mild-focus-color); outline-offset: 2px; }
+
+/* Disabled: the track and thumb dim to M3's 38%; the label stays readable (muted) so the control can still be identified. */
+.slider[data-disabled] { color: var(--mild-color-text-muted); }
+.slider[data-disabled] .output { color: inherit; }
+.slider[data-disabled] .track {
+  background: color-mix(in srgb, var(--md-sys-color-on-surface) 12%, transparent);
+  cursor: not-allowed;
+}
+.slider[data-disabled] .fill,
+.slider[data-disabled] .thumb { background: color-mix(in srgb, var(--md-sys-color-on-surface) 38%, transparent); }
+.thumb[data-disabled]::after { display: none; }

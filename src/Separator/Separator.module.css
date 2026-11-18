@@ -1,0 +1,18 @@
+.separator {
+  flex: none;
+  margin: var(--mild-space-2) 0;
+  background: var(--md-sys-color-outline-variant);
+  border: 0;
+}
+
+.separator[aria-orientation="vertical"] {
+  align-self: center;
+  width: 1px;
+  height: 24px;
+  margin: 0 var(--mild-space-2);
+}
+
+.separator:not([aria-orientation="vertical"]) {
+  height: 1px;
+  width: auto;
+}
