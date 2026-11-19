@@ -48,7 +48,6 @@ export default defineConfig({
       },
     },
     cssCodeSplit: false,
-    sourcemap: true,
   },
   test: {
     environment: 'jsdom',
