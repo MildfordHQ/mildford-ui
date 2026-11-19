@@ -17,14 +17,7 @@
     "./style.css": "./dist/ui.css"
   },
   "files": [
-    "dist",
-    "src",
-    "!src/**/*.test.ts",
-    "!src/**/*.test.tsx",
-    "!src/**/*.stories.tsx",
-    "!src/**/*.stories.module.css",
-    "!src/stories",
-    "!src/test"
+    "dist"
   ],
   "sideEffects": [
     "**/*.css"
