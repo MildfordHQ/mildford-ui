@@ -4,7 +4,7 @@
   "description": "Mildford UI - Material 3 Expressive design system for control planes and creative tools, on React Aria Components",
   "license": "MIT",
   "type": "module",
-  "packageManager": "pnpm@10.0.0",
+  "packageManager": "pnpm@12.21.0",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",

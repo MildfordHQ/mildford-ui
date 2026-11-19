@@ -5,7 +5,7 @@ Thanks for your interest in Mildford UI. Bug reports, accessibility findings and
 ## Setup
 
 - Node.js 24 (the version in `.nvmrc`; run `nvm use`)
-- pnpm 10 (`corepack enable` picks up the version in `package.json`)
+- pnpm 12 (`corepack enable` picks up the version in `package.json`)
 
 ```sh
 pnpm install
